@@ -1,5 +1,7 @@
 #include <Arduino.h>
 
+// This stuff here currently does nothing don't worry
+
 // Define the analog pin you want to read
 const int analogPin = 32; // Change to the appropriate analog pin
 
