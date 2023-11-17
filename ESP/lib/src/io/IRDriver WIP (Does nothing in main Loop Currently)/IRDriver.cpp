@@ -1,4 +1,6 @@
 #include <Arduino.h>
+#include <pwmWrite.h>
+#include "IRDriver.hpp"
 
 // This stuff here currently does nothing don't worry
 
@@ -25,8 +27,20 @@ const int referenceTable[][2] = {
 // Variable to store the current status bit
 bool statusBit = false;
 
+
+// Function to control PWM based on the matched value
+void controlPWM(int matchedValue) {
+    if (matchedValue >= 0) {
+        analogWrite(pwmPin, matchedValue);
+    } else {
+        analogWrite(pwmPin, 0); // Turn off PWM
+        statusBit = true;       // Update status bit
+    }
+}
+
+
+int IRDriver::initialize() {
 // Function to read analog value and match it to the reference table
-int readAnalogValue() {
     int analogValue = analogRead(analogPin);
     int matchedValue = -1;
 
@@ -39,42 +53,4 @@ int readAnalogValue() {
     }
 
     return matchedValue;
-}
-
-// Function to control PWM based on the matched value
-void controlPWM(int matchedValue) {
-    if (matchedValue >= 0) {
-        analogWrite(pwmPin, matchedValue);
-    } else {
-        analogWrite(pwmPin, 0); // Turn off PWM
-        statusBit = true;       // Update status bit
-    }
-}
-
-void setup() {
-    pinMode(pwmPin, OUTPUT);
-    // Existing setup code goes here
-}
-
-void loop() {
-    static unsigned long lastCheckTime = 0;
-
-    // Check analog value at the specified interval
-    unsigned long currentTime = millis();
-    if (currentTime - lastCheckTime >= checkInterval) {
-        int matchedValue = readAnalogValue();
-        controlPWM(matchedValue);
-
-        // Reset status bit
-        statusBit = false;
-
-        Serial.print("Analog Value: ");
-        Serial.print(analogRead(analogPin));
-        Serial.print(" Matched Value: ");
-        Serial.println(matchedValue);
-
-        lastCheckTime = currentTime;
-    }
-
-    // Existing loop code goes here
 }

@@ -80,6 +80,7 @@ void setup() {
   Logo::printASCII();
   //  Serial.flush();
   ledManager.begin();
+  
 
 #ifndef SIM_ENABLED
   deviceConfig.attach(cameraHandler);
