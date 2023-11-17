@@ -29,7 +29,9 @@ Nonetheless, pull requests and issues are welcome, let's get this cracking!
 
 ### TODO
 - [ ] streaming over sockets instead of HTTP MJPEG for faster streams!
-- [ ] better LED patterns 
+- [ ] better LED patterns
+- [ ] Adding Support for the Inbuild IR Drivers
+- [ ] Automatic IR Brightness Adjustment
 
 # Docs: 
 The "documentation" that was once present here was very old and outdated, we've moved from it being spread out in multiple repos to one place while also massively improving and expanding it, for the current info check this out:
