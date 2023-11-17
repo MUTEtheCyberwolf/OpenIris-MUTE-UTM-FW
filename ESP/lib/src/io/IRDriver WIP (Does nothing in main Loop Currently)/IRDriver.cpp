@@ -27,7 +27,6 @@ const int referenceTable[][2] = {
 // Variable to store the current status bit
 bool statusBit = false;
 
-
 // Function to control PWM based on the matched value
 void controlPWM(int matchedValue) {
     if (matchedValue >= 0) {
